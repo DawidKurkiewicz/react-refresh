@@ -39,7 +39,7 @@ this.setState({
       <div className="App">
        <h1>hello world</h1>
        <h2>its actually works</h2>
-       <button onClick={this.switchNameHandler.bind(this, "Jerry")}>Switch Name</button>
+       <button onClick={()=>this.switchNameHandler("Jerry")}>Switch Name</button>
        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
        <Person name={this.state.persons[1].name} age={this.state.persons[1].age} 
        click={this.switchNameHandler.bind(this, "Mike")}> My mom name: Eliza</Person>
