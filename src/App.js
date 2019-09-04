@@ -26,7 +26,7 @@ this.setState({
       name: newName, age:25
     },
     {
-      name: "Manuel", age:25
+      name: "Manuel", age:26
     },
     {
       name: "Marc", age:27
