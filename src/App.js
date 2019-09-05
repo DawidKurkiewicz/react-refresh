@@ -8,13 +8,13 @@ class App extends Component {
   state = {
     persons: [
       {
-        name: "Max", age: 24
+        name: "Max", age: 24, id:"0"
       },
       {
-        name: "Manuel", age: 25
+        name: "Manuel", age: 25, id:"1"
       },
       {
-        name: "Marc", age: 27
+        name: "Marc", age: 27, id:"2"
       }
     ],
     users: [
@@ -32,13 +32,13 @@ class App extends Component {
     this.setState({
       persons: [
         {
-          name: newName, age: 24
+          name: newName, age: 24, id:"0"
         },
         {
-          name: "Manuel", age: 25
+          name: "Manuel", age: 25, id:"1"
         },
         {
-          name: "Marc", age: 27
+          name: "Marc", age: 27, id:"2"
         }
       ]
     })
@@ -47,21 +47,22 @@ class App extends Component {
     this.setState({
       persons: [
         {
-          name: "Max", age: 24
+          name: "Max", age: 24, id:"0"
         },
         {
-          name: event.target.value, age: 25
+          name: event.target.value, age: 25, id:"1"
         },
         {
-          name: "Marc", age: 27
+          name: "Marc", age: 27, id:"2"
         }
       ]
     })
   }
-  deletePersonHandler = (personIndex) =>{
-    const persons = this.state.persons;
-    persons.splice(personIndex,1)
-    this.setState({persons:persons})
+  deletePersonHandler = (personIndex) => {
+    const persons = [...this.state.persons]
+    persons.splice(personIndex, 1)
+    this.setState({ persons: persons }, () => console.log(this.state))
+
   }
   userNameChangeHandler = () => {
     this.setState({
@@ -109,8 +110,12 @@ class App extends Component {
       users = (
         <div>
           <UserInput change={this.inputUserNameChangeHandler} currentName={this.state.users[0].userName} />
-          {this.state.users.map(user => {
-            return <UserOutput userName={user.userName} change={this.userNameChangeHandler} />
+          {this.state.users.map((user, index) => {
+            return <UserOutput
+              key={index}
+              userName={user.userName}
+              change={this.userNameChangeHandler}
+            />
           })}
         </div>
       )
@@ -120,48 +125,49 @@ class App extends Component {
     if (!this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person,index) => {
+          {this.state.persons.map((person, index) => {
             return <Person
+              key={person.id}
               name={person.name}
               age={person.age}
               changed={this.nameChangeHandler}
               click={this.switchNameHandler.bind(this, "Mike")}
-              delete={()=>this.deletePersonHandler(index)}
+              delete={() => this.deletePersonHandler(index)}
 
 
             />
           })}
         </div>
       )
-        }
-      return (
-        <div className="App">
-          <h1>hello world</h1>
-          <h2>its actually works</h2>
-          <button style={style}
-            onClick={() => this.switchNameHandler("Jerry")}>
-            Switch Name
-       </button>
-          <button style={style}
-            onClick={this.togglePersonsHandler}>
-            Toggle
-       </button>
-       {persons}
-
-          <button style={style}
-            onClick={this.userNameChangeHandler}>
-            change
-          </button>
-          <button style={style}
-            onClick={this.toggleUsersHandler}>
-            Toggle
-       </button>
-
-          {users}
-        </div>
-      );
     }
+    return (
+      <div className="App">
+        <h1>hello world</h1>
+        <h2>its actually works</h2>
+        <button style={style}
+          onClick={() => this.switchNameHandler("Jerry")}>
+          Switch Name
+       </button>
+        <button style={style}
+          onClick={this.togglePersonsHandler}>
+          Toggle
+       </button>
+        {persons}
+
+        <button style={style}
+          onClick={this.userNameChangeHandler}>
+          change
+          </button>
+        <button style={style}
+          onClick={this.toggleUsersHandler}>
+          Toggle
+       </button>
+
+        {users}
+      </div>
+    );
   }
+}
 
 export default App;
 
