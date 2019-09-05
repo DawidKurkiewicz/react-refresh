@@ -63,6 +63,9 @@ class App extends Component {
       users: [
         {
           userName: "Max"
+        },
+        {
+          userName: "Luisa"
         }
       ]
     })
@@ -72,6 +75,9 @@ class App extends Component {
       users: [
         {
           userName: event.target.value
+        },
+        {
+          userName: "Linda"
         }
       ]
     })
@@ -97,10 +103,14 @@ class App extends Component {
     if (!this.state.showUsers) {
       users = (
         <div>
+          <UserInput change={this.inputUserNameChangeHandler} currentName={this.state.users[0].userName} />
+          {this.state.users.map(user => {
+            return <UserOutput userName={user.userName} change={this.userNameChangeHandler} />
+          })}
+          {/* <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
           <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
           <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
+          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} /> */}
         </div>
       )
 
@@ -141,11 +151,10 @@ class App extends Component {
           onClick={this.userNameChangeHandler}>
           change
           </button>
-          <button style={style}
+        <button style={style}
           onClick={this.toggleUsersHandler}>
           Toggle
        </button>
-        <UserInput change={this.inputUserNameChangeHandler} currentName={this.state.users[0].userName} />
 
         {users}
       </div>
