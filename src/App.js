@@ -83,8 +83,8 @@ class App extends Component {
     })
   }
   togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow })
+    const doesShowPersons = this.state.showPersons;
+    this.setState({ showPersons: !doesShowPersons })
   }
   toggleUsersHandler = () => {
     const doesShowUsers = this.state.showUsers;
@@ -107,60 +107,52 @@ class App extends Component {
           {this.state.users.map(user => {
             return <UserOutput userName={user.userName} change={this.userNameChangeHandler} />
           })}
-          {/* <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} /> */}
         </div>
       )
 
     }
-    return (
-      <div className="App">
-        <h1>hello world</h1>
-        <h2>its actually works</h2>
-        <button style={style}
-          onClick={() => this.switchNameHandler("Jerry")}>
-          Switch Name
-       </button>
-        <button style={style}
-          onClick={this.togglePersonsHandler}>
-          Toggle
-       </button>
-        {
-          !this.state.showPersons ?
-            <div>
-              <Person
-                name={this.state.persons[0].name}
-                age={this.state.persons[0].age} />
-              <Person
-                name={this.state.persons[1].name}
-                age={this.state.persons[1].age}
-                click={this.switchNameHandler.bind(this, "Mike")}
-                changed={this.nameChangeHandler}>
-                My mom name: Eliza
-              </Person>
-              <Person
-                name={this.state.persons[2].name}
-                age={this.state.persons[2].age} >
-                My hobby: racing
-              </Person>
-            </div> : null
+    let persons = null;
+    if (!this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map(person => {
+            return <Person
+              name={person.name}
+              age={person.age}
+              changed={this.nameChangeHandler}
+            />
+          })}
+        </div>
+      )
         }
-        <button style={style}
-          onClick={this.userNameChangeHandler}>
-          change
+      return (
+        <div className="App">
+          <h1>hello world</h1>
+          <h2>its actually works</h2>
+          <button style={style}
+            onClick={() => this.switchNameHandler("Jerry")}>
+            Switch Name
+       </button>
+          <button style={style}
+            onClick={this.togglePersonsHandler}>
+            Toggle
+       </button>
+       {persons}
+
+          <button style={style}
+            onClick={this.userNameChangeHandler}>
+            change
           </button>
-        <button style={style}
-          onClick={this.toggleUsersHandler}>
-          Toggle
+          <button style={style}
+            onClick={this.toggleUsersHandler}>
+            Toggle
        </button>
 
-        {users}
-      </div>
-    );
+          {users}
+        </div>
+      );
+    }
   }
-}
 
 export default App;
 
