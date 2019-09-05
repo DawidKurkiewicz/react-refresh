@@ -25,7 +25,8 @@ class App extends Component {
         userName: "Linda"
       }
     ],
-    showPersons: false
+    showPersons: false,
+    showUsers: false
   }
   switchNameHandler = (newName) => {
     this.setState({
@@ -77,7 +78,11 @@ class App extends Component {
   }
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-this.setState({showPersons: !doesShow})
+    this.setState({ showPersons: !doesShow })
+  }
+  toggleUsersHandler = () => {
+    const doesShowUsers = this.state.showUsers;
+    this.setState({ showUsers: !doesShowUsers })
   }
 
   render() {
@@ -88,18 +93,32 @@ this.setState({showPersons: !doesShow})
       padding: "8px",
       cursor: "pointer"
     };
+    let users = null;
+    if (!this.state.showUsers) {
+      users = (
+        <div>
+          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
+          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
+          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
+          <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
+        </div>
+      )
+
+    }
     return (
       <div className="App">
         <h1>hello world</h1>
         <h2>its actually works</h2>
         <button style={style}
-          onClick={() => this.switchNameHandler("Jerry")}>Switch Name
+          onClick={() => this.switchNameHandler("Jerry")}>
+          Switch Name
        </button>
         <button style={style}
-          onClick={this.togglePersonsHandler}>Toggle
+          onClick={this.togglePersonsHandler}>
+          Toggle
        </button>
         {
-          this.state.showPersons ?
+          !this.state.showPersons ?
             <div>
               <Person
                 name={this.state.persons[0].name}
@@ -119,13 +138,16 @@ this.setState({showPersons: !doesShow})
             </div> : null
         }
         <button style={style}
-          onClick={this.userNameChangeHandler}> change </button>
+          onClick={this.userNameChangeHandler}>
+          change
+          </button>
+          <button style={style}
+          onClick={this.toggleUsersHandler}>
+          Toggle
+       </button>
         <UserInput change={this.inputUserNameChangeHandler} currentName={this.state.users[0].userName} />
-        <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-        <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-        <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
-        <UserOutput userName={this.state.users[0].userName} change={this.userNameChangeHandler} />
 
+        {users}
       </div>
     );
   }
