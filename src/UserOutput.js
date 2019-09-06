@@ -3,7 +3,7 @@ const outputUser = (props) =>{
     return (
     <div className="Person">
    <p>{props.userName}</p>
-   <p>thats works for all of us</p>
+   <p>I'm the {props.id} user of this app</p>
     </div>
     )
 }
