@@ -4,6 +4,7 @@ import Person from './Person';
 import UserOutput from './UserOutput';
 import UserInput from './UserInput';
 import Validation from"./Validation"
+import Char from"./Char"
 
 class App extends Component {
   state = {
@@ -33,8 +34,13 @@ class App extends Component {
   inputChangedHanlder = (event)=>{
     this.setState({userInput: event.target.value})
   }
+  deleteCharHandler=(index)=>{
+    const text = this.state.userInput.split('')
+    text.splice(index, 1);
+    const updatedText = text.join('')
+    this.setState({ userInput: updatedText })
+  }
   switchNameHandler = (newName) => {
-    
     this.setState({
       persons: [
         {
@@ -103,6 +109,9 @@ class App extends Component {
   }
 
   render() {
+    const charList = this.state.userInput.split('').map((char, index) =>{
+      return <Char character={char} key={index} clicked={()=>this.deleteCharHandler(index)}/>
+    });
     const style = {
       backgroundColor: "yellow",
       font: "inherit",
@@ -160,6 +169,7 @@ class App extends Component {
         <input type="text" onChange={this.inputChangedHanlder} value={this.state.userInput}/>
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length}/>
+        {charList}
         <h1>hello world</h1>
         <h2>its actually works</h2>
         <button style={style}
