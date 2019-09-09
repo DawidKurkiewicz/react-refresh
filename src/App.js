@@ -113,12 +113,13 @@ class App extends Component {
       return <Char character={char} key={index} clicked={()=>this.deleteCharHandler(index)}/>
     });
     const style = {
-      backgroundColor: "yellow",
+      backgroundColor: "red",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer",
-      margin: "10px"
+      margin: "10px",
+      color: "white"
     };
     let users = null;
     if (!this.state.showUsers) {
@@ -139,7 +140,6 @@ class App extends Component {
           })}
         </div>
       )
-
     }
     let persons = null;
     if (!this.state.showPersons) {
@@ -162,7 +162,8 @@ class App extends Component {
             />
           })}
         </div>
-      )
+      );
+      style.backgroundColor = "green"
     }
     return (
       <div className="App">
