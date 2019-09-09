@@ -3,9 +3,11 @@ import './App.css';
 import Person from './Person';
 import UserOutput from './UserOutput';
 import UserInput from './UserInput';
+import Validation from"./Validation"
 
 class App extends Component {
   state = {
+    userInput: "",
     persons: [
       {
         name: "Max", age: 24, id: "0"
@@ -26,7 +28,10 @@ class App extends Component {
       }
     ],
     showPersons: false,
-    showUsers: false
+    showUsers: false,
+  }
+  inputChangedHanlder = (event)=>{
+    this.setState({userInput: event.target.value})
   }
   switchNameHandler = (newName) => {
     
@@ -152,6 +157,9 @@ class App extends Component {
     }
     return (
       <div className="App">
+        <input type="text" onChange={this.inputChangedHanlder} value={this.state.userInput}/>
+        <p>{this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length}/>
         <h1>hello world</h1>
         <h2>its actually works</h2>
         <button style={style}
