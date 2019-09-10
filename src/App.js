@@ -3,9 +3,9 @@ import './App.css';
 import Person from './Person';
 import UserOutput from './UserOutput';
 import UserInput from './UserInput';
-import Validation from"./Validation"
 import Char from"./Char"
 import Cockpit from"./Cockpit"
+import CharInput from"./CharInput"
 
 class App extends Component {
   state = {
@@ -167,20 +167,23 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <input type="text" onChange={this.inputChangedHanlder} value={this.state.userInput}/>
-        <p>{this.state.userInput}</p>
-        <Validation inputLength={this.state.userInput.length}/>
-        {charList}
+        <CharInput
+         change={this.inputChangedHanlder} 
+         val={this.state.userInput}
+         par={this.state.userInput}
+         len={this.state.userInput.length}
+         char={charList}
+
+         />
+        {/* <input type="text" onChange={this.inputChangedHanlder} value={this.state.userInput}/>
+        <p>{this.state.userInput}</p> */}
         <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
+          click={this.toggleUsersHandler}
         />
-        <button style={style}
-          onClick={this.toggleUsersHandler}>
-          Toggle Users
-       </button>
         {persons}
         {users}
       </div>

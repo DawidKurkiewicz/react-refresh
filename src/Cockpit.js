@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-const cockpit = ( props ) => {
+import React, { useEffect } from 'react';
+const cockpit = (props) => {
     const style = {
         backgroundColor: "red",
         font: "inherit",
@@ -8,14 +8,19 @@ const cockpit = ( props ) => {
         cursor: "pointer",
         margin: "10px",
         color: "white"
-      };
+    };
     return (
         <div className="Cockpit">
             <h1>{props.title}</h1>
             <p>This is really working!</p>
             <button
-            style={style}
-                onClick={props.clicked}>Toggle Persons</button>
+                style={style}
+                onClick={props.clicked}>Toggle Persons
+                </button>
+            <button style={style}
+                onClick={props.click}>
+                Toggle Users
+       </button>
         </div>
     );
 };
