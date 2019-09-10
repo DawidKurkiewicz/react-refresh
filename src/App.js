@@ -31,6 +31,7 @@ class App extends Component {
     ],
     showPersons: false,
     showUsers: false,
+    showInput:false
   }
   inputChangedHanlder = (event)=>{
     this.setState({userInput: event.target.value})
@@ -74,7 +75,6 @@ class App extends Component {
     const persons = [...this.state.persons]
     persons.splice(personIndex, 1)
     this.setState({ persons: persons })
-
   }
   userNameChangeHandler = () => {
     this.setState({
@@ -108,7 +108,10 @@ class App extends Component {
     const doesShowUsers = this.state.showUsers;
     this.setState({ showUsers: !doesShowUsers })
   }
-
+  toggleInputHandler=()=>{
+    const doesShowInput = this.state.showInput;
+    this.setState({ showInput: !doesShowInput })
+  }
   render() {
     const charList = this.state.userInput.split('').map((char, index) =>{
       return <Char character={char} key={index} clicked={()=>this.deleteCharHandler(index)}/>
@@ -122,8 +125,8 @@ class App extends Component {
       margin: "10px",
       color: "white"
     };
-    let users = null;
-    if (!this.state.showUsers) {
+    let users = null; 
+    if (this.state.showUsers) {
       users = (
         <div>
           <button style={style}
@@ -143,7 +146,7 @@ class App extends Component {
       )
     }
     let persons = null;
-    if (!this.state.showPersons) {
+    if (this.state.showPersons) {
       persons = (
         <div>
           <button style={style}
@@ -158,82 +161,34 @@ class App extends Component {
               changed={(event)=>this.nameChangeHandler(event, person.id)}
               click={this.switchNameHandler.bind(this, "Mike")}
               delete={() => this.deletePersonHandler(index)}
-
-
             />
           })}
         </div>
       );
     }
+    let input = this.state.showInput ? 
+    <CharInput
+    change={this.inputChangedHanlder} 
+    val={this.state.userInput}
+    par={this.state.userInput}
+    len={this.state.userInput.length}
+    char={charList}
+    /> : null
     return (
       <div className="App">
-        <CharInput
-         change={this.inputChangedHanlder} 
-         val={this.state.userInput}
-         par={this.state.userInput}
-         len={this.state.userInput.length}
-         char={charList}
-
-         />
-        {/* <input type="text" onChange={this.inputChangedHanlder} value={this.state.userInput}/>
-        <p>{this.state.userInput}</p> */}
         <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
           click={this.toggleUsersHandler}
+          toggle={this.toggleInputHandler}
         />
         {persons}
         {users}
+        {input}
       </div>
     );
   }
 }
-
 export default App;
-
-
-
-// const app = props => {
-//   const [personsState, setPersonsState] = useState({
-//     persons: [
-//       { name: 'Max', age: 28 },
-//       { name: 'Manu', age: 29 },
-//       { name: 'Stephanie', age: 26 }
-//     ]
-//   });
-//   const switchNameHandler = () => {
-//     setPersonsState({
-//       persons: [
-//         { name: 'Maximilian', age: 28 },
-//         { name: 'Manu', age: 29 },
-//         { name: 'Stephanie', age: 27 }
-//       ]
-//     });
-//   };
-
-//   return (
-//     <div className="App">
-//       <h1>Hi, I'm a React App</h1>
-//       <p>This is really working!</p>
-//       <button onClick={switchNameHandler}>Switch Name</button>
-//       <Person
-//         name={personsState.persons[0].name}
-//         age={personsState.persons[0].age}
-//       />
-//       <Person
-//         name={personsState.persons[1].name}
-//         age={personsState.persons[1].age}
-//       >
-//         My Hobbies: Racing
-//       </Person>
-//       <Person
-//         name={personsState.persons[2].name}
-//         age={personsState.persons[2].age}
-//       />
-//     </div>
-//   );
-// };
-
-// export default app;
