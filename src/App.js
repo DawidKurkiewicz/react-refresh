@@ -1,10 +1,11 @@
-import React, { Component, useState } from 'react';
+import React, { Component} from 'react';
 import './App.css';
 import Person from './Person';
 import UserOutput from './UserOutput';
 import UserInput from './UserInput';
 import Validation from"./Validation"
 import Char from"./Char"
+import Cockpit from"./Cockpit"
 
 class App extends Component {
   state = {
@@ -163,7 +164,6 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "green"
     }
     return (
       <div className="App">
@@ -171,12 +171,12 @@ class App extends Component {
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length}/>
         {charList}
-        <h1>hello world</h1>
-        <h2>its actually works</h2>
-        <button style={style}
-          onClick={this.togglePersonsHandler}>
-          Toggle Persons
-       </button>
+        <Cockpit
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonsHandler}
+        />
         <button style={style}
           onClick={this.toggleUsersHandler}>
           Toggle Users
