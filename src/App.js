@@ -6,6 +6,7 @@ import UserInput from './UserInput';
 import Char from"./Char"
 import Cockpit from"./Cockpit"
 import CharInput from"./CharInput"
+import { throws } from 'assert';
 
 class App extends Component {
   state = {
@@ -31,7 +32,8 @@ class App extends Component {
     ],
     showPersons: false,
     showUsers: false,
-    showInput:false
+    showInput:false,
+    showCockpit: true
   }
   inputChangedHanlder = (event)=>{
     this.setState({userInput: event.target.value})
@@ -112,6 +114,10 @@ class App extends Component {
     const doesShowInput = this.state.showInput;
     this.setState({ showInput: !doesShowInput })
   }
+  toggleCockpitHandler=()=>{
+  const doesShowCockpit = this.state.showCockpit;
+  this.setState({ showCockpit: !doesShowCockpit })
+}
   render() {
     const charList = this.state.userInput.split('').map((char, index) =>{
       return <Char character={char} key={index} clicked={()=>this.deleteCharHandler(index)}/>
@@ -128,7 +134,7 @@ class App extends Component {
     let users = null; 
     if (this.state.showUsers) {
       users = (
-        <div>
+        <div className="Users">
           <button style={style}
             onClick={this.userNameChangeHandler}>
             change
@@ -148,7 +154,7 @@ class App extends Component {
     let persons = null;
     if (this.state.showPersons) {
       persons = (
-        <div>
+        <div className="Persons">
           <button style={style}
             onClick={() => this.switchNameHandler("Jerry")}>
             Switch Name
@@ -174,16 +180,19 @@ class App extends Component {
     len={this.state.userInput.length}
     char={charList}
     /> : null
-    return (
-      <div className="App">
-        <Cockpit
+    let cockpit = this.state.showCockpit ?
+    <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
           click={this.toggleUsersHandler}
           toggle={this.toggleInputHandler}
-        />
+        /> : null
+    return (
+      <div className="App">
+        <button onClick ={this.toggleCockpitHandler}style={style}>Toggle Cockpit</button>
+        {cockpit}
         {persons}
         {users}
         {input}

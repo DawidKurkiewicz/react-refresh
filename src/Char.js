@@ -8,7 +8,7 @@ const char = (props) => {
         textAlign: "center"
     }
     return (
-        <div style={style} onClick={props.clicked}>
+        <div className ="SingleLetter" style={style} onClick={props.clicked}>
             {props.character}
         </div>
     )

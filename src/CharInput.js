@@ -6,7 +6,7 @@ const input = (props) => {
              <input type="text" onChange={props.change} value={props.val}/>
         <p>{props.par}</p>
         <Validation inputLength={props.len}/>
-        <div>{props.char}</div>
+        <div className="Letters">{props.char}</div>
 
         </div>
     );
