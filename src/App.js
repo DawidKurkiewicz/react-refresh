@@ -6,7 +6,7 @@ import UserInput from './UserInput';
 import Char from"./Char"
 import Cockpit from"./Cockpit"
 import CharInput from"./CharInput"
-
+import WithClass from "./hoc/WithClass"
 class App extends Component {
   state = {
     userInput: "",
@@ -189,13 +189,13 @@ class App extends Component {
           toggle={this.toggleInputHandler}
         /> : null
     return (
-      <div className="App">
+      <WithClass classes="App">
         <button onClick ={this.toggleCockpitHandler}style={style}>Toggle Cockpit</button>
         {cockpit}
         {persons}
         {users}
         {input}
-      </div>
+      </WithClass>
     );
   }
 }
