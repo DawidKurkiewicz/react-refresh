@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./Person.css"
-import Aux from "./Aux"
+import Aux from "./Auxiliary"
 class Person extends Component {
     render() {
         return (
