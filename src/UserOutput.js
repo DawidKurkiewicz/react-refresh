@@ -1,11 +1,11 @@
 import React from 'react'
 const outputUser = (props) =>{
     return (
-    <div className="Person">
+    <React.Fragment>
    <p>{props.userName}</p>
    <p>I'm the {props.id} user of this app</p>
-    </div>
-    )
+   </React.Fragment>
+       )
 }
 
 export default outputUser
