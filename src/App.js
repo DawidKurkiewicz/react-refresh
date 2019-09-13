@@ -6,7 +6,6 @@ import UserInput from './UserInput';
 import Char from"./Char"
 import Cockpit from"./Cockpit"
 import CharInput from"./CharInput"
-import { throws } from 'assert';
 
 class App extends Component {
   state = {
