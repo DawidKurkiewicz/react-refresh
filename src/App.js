@@ -1,11 +1,11 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person';
 import UserOutput from './UserOutput';
 import UserInput from './UserInput';
-import Char from"./Char"
-import Cockpit from"./Cockpit"
-import CharInput from"./CharInput"
+import Char from "./Char"
+import Cockpit from "./Cockpit"
+import CharInput from "./CharInput"
 import WithClass from "./hoc/WithClass"
 class App extends Component {
   state = {
@@ -31,13 +31,13 @@ class App extends Component {
     ],
     showPersons: false,
     showUsers: false,
-    showInput:false,
+    showInput: false,
     showCockpit: true
   }
-  inputChangedHanlder = (event)=>{
-    this.setState({userInput: event.target.value})
+  inputChangedHanlder = (event) => {
+    this.setState({ userInput: event.target.value })
   }
-  deleteCharHandler=(index)=>{
+  deleteCharHandler = (index) => {
     const text = this.state.userInput.split('')
     text.splice(index, 1);
     const updatedText = text.join('')
@@ -59,7 +59,7 @@ class App extends Component {
     })
   }
   nameChangeHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(p=>{
+    const personIndex = this.state.persons.findIndex(p => {
       return p.id === id
     })
     const person = {
@@ -67,9 +67,9 @@ class App extends Component {
     }
     person.name = event.target.value
     const persons = [...this.state.persons];
-    persons[personIndex]= person
+    persons[personIndex] = person
     this.setState({
-      persons:persons
+      persons: persons
     })
   }
   deletePersonHandler = (personIndex) => {
@@ -109,17 +109,22 @@ class App extends Component {
     const doesShowUsers = this.state.showUsers;
     this.setState({ showUsers: !doesShowUsers })
   }
-  toggleInputHandler=()=>{
+  toggleInputHandler = () => {
     const doesShowInput = this.state.showInput;
     this.setState({ showInput: !doesShowInput })
   }
-  toggleCockpitHandler=()=>{
-  const doesShowCockpit = this.state.showCockpit;
-  this.setState({ showCockpit: !doesShowCockpit })
-}
+  toggleCockpitHandler = () => {
+    const doesShowCockpit = this.state.showCockpit;
+    this.setState({ showCockpit: !doesShowCockpit })
+  }
   render() {
-    const charList = this.state.userInput.split('').map((char, index) =>{
-      return <Char character={char} key={index} clicked={()=>this.deleteCharHandler(index)}/>
+    const charList = this.state.userInput.split('').map((char, index) => {
+      return (
+        <Char
+          character={char}
+          key={index}
+          clicked={() => this.deleteCharHandler(index)} />
+      )
     });
     const style = {
       backgroundColor: "red",
@@ -130,7 +135,7 @@ class App extends Component {
       margin: "10px",
       color: "white"
     };
-    let users = null; 
+    let users = null;
     if (this.state.showUsers) {
       users = (
         <div className="Users">
@@ -138,11 +143,12 @@ class App extends Component {
             onClick={this.userNameChangeHandler}>
             change
           </button>
-          <UserInput change={this.inputUserNameChangeHandler} currentName={this.state.users[0].userName} />
+          <UserInput change={this.inputUserNameChangeHandler}
+            currentName={this.state.users[0].userName} />
           {this.state.users.map((user, index) => {
             return <UserOutput
               key={index}
-              id={index+1}
+              id={index + 1}
               userName={user.userName}
               change={this.userNameChangeHandler}
             />
@@ -163,7 +169,7 @@ class App extends Component {
               key={person.id}
               name={person.name}
               age={person.age}
-              changed={(event)=>this.nameChangeHandler(event, person.id)}
+              changed={(event) => this.nameChangeHandler(event, person.id)}
               click={this.switchNameHandler.bind(this, "Mike")}
               delete={() => this.deletePersonHandler(index)}
             />
@@ -171,26 +177,26 @@ class App extends Component {
         </div>
       );
     }
-    let input = this.state.showInput ? 
-    <CharInput
-    change={this.inputChangedHanlder} 
-    val={this.state.userInput}
-    par={this.state.userInput}
-    len={this.state.userInput.length}
-    char={charList}
-    /> : null
+    let input = this.state.showInput ?
+      <CharInput
+        change={this.inputChangedHanlder}
+        val={this.state.userInput}
+        par={this.state.userInput}
+        len={this.state.userInput.length}
+        char={charList}
+      /> : null
     let cockpit = this.state.showCockpit ?
-    <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonsHandler}
-          click={this.toggleUsersHandler}
-          toggle={this.toggleInputHandler}
-        /> : null
+      <Cockpit
+        title={this.props.appTitle}
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked={this.togglePersonsHandler}
+        click={this.toggleUsersHandler}
+        toggle={this.toggleInputHandler}
+      /> : null
     return (
       <WithClass classes="App">
-        <button onClick ={this.toggleCockpitHandler}style={style}>Toggle Cockpit</button>
+        <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
         {persons}
         {users}
