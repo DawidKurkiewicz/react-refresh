@@ -138,7 +138,6 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer",
-      margin: "10px",
       color: "white",
       display:"block",
       margin: "10px auto"
