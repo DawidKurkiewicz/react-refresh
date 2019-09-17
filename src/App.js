@@ -8,7 +8,7 @@ import Cockpit from "./Cockpit"
 import CharInput from "./CharInput"
 import Auxiliary from "./hoc/Auxiliary"
 
-import WithClass from "./hoc/WithClass"
+import wrapper from "./hoc/wrapper"
 class App extends Component {
   state = {
     userInput: "",
@@ -202,13 +202,13 @@ class App extends Component {
       toggle={this.toggleInputHandler}
     /> 
       let withClass = this.state.showWithClass ? 
-      <WithClass classes="App">
+      <Auxiliary classes="App">
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
         {persons}
         {users}
         {input}
-      </WithClass> : null
+      </Auxiliary> : null
     return (
       <Auxiliary>
       <button onClick={this.toggleWithClassHandler} style={style}>Toggle App</button>
@@ -217,4 +217,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default wrapper(App, "App")
