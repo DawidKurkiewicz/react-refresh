@@ -6,6 +6,8 @@ import UserInput from './UserInput';
 import Char from "./Char"
 import Cockpit from "./Cockpit"
 import CharInput from "./CharInput"
+import Auxiliary from "./hoc/Auxiliary"
+
 import WithClass from "./hoc/WithClass"
 class App extends Component {
   state = {
@@ -117,6 +119,10 @@ class App extends Component {
     const doesShowCockpit = this.state.showCockpit;
     this.setState({ showCockpit: !doesShowCockpit })
   }
+  toggleWithClassHandler = () => {
+    const doesShowWithClass = this.state.showWithClass
+    this.setState({ showWithClass: !doesShowWithClass })
+  }
   render() {
     const charList = this.state.userInput.split('').map((char, index) => {
       return (
@@ -133,7 +139,9 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer",
       margin: "10px",
-      color: "white"
+      color: "white",
+      display:"block",
+      margin: "10px auto"
     };
     let users = null;
     if (this.state.showUsers) {
@@ -186,22 +194,27 @@ class App extends Component {
         char={charList}
       /> : null
     let cockpit = this.state.showCockpit ?
-      <Cockpit
-        title={this.props.appTitle}
-        showPersons={this.state.showPersons}
-        persons={this.state.persons}
-        clicked={this.togglePersonsHandler}
-        click={this.toggleUsersHandler}
-        toggle={this.toggleInputHandler}
-      /> : null
-    return (
+      null :  <Cockpit
+      title={this.props.appTitle}
+      showPersons={this.state.showPersons}
+      persons={this.state.persons}
+      clicked={this.togglePersonsHandler}
+      click={this.toggleUsersHandler}
+      toggle={this.toggleInputHandler}
+    /> 
+      let withClass = this.state.showWithClass ? 
       <WithClass classes="App">
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
         {persons}
         {users}
         {input}
-      </WithClass>
+      </WithClass> : null
+    return (
+      <Auxiliary>
+      <button onClick={this.toggleWithClassHandler} style={style}>Toggle App</button>
+      {withClass}
+      </Auxiliary>
     );
   }
 }
