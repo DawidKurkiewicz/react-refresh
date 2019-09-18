@@ -6,7 +6,6 @@ import UserInput from './UserInput';
 import Char from "./Char"
 import Cockpit from "./Cockpit"
 import CharInput from "./CharInput"
-import Auxiliary from "./hoc/Auxiliary"
 
 import wrapper from "./hoc/wrapper"
 class App extends Component {
@@ -34,7 +33,7 @@ class App extends Component {
     showPersons: false,
     showUsers: false,
     showInput: false,
-    showCockpit: true
+    showCockpit: false
   }
   inputChangedHanlder = (event) => {
     this.setState({ userInput: event.target.value })
@@ -193,7 +192,7 @@ class App extends Component {
         char={charList}
       /> : null
     let cockpit = this.state.showCockpit ?
-      null :  <Cockpit
+    <Cockpit
       title={this.props.appTitle}
       showPersons={this.state.showPersons}
       persons={this.state.persons}
@@ -201,19 +200,20 @@ class App extends Component {
       click={this.toggleUsersHandler}
       toggle={this.toggleInputHandler}
     /> 
+      : null 
       let withClass = this.state.showWithClass ? 
-      <Auxiliary classes="App">
+      <div >
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
         {persons}
         {users}
         {input}
-      </Auxiliary> : null
+      </div> : null
     return (
-      <Auxiliary>
+ <div>
       <button onClick={this.toggleWithClassHandler} style={style}>Toggle App</button>
       {withClass}
-      </Auxiliary>
+</div>
     );
   }
 }
