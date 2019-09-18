@@ -132,7 +132,7 @@ class App extends Component {
       )
     });
     const style = {
-      backgroundColor: "red",
+      backgroundColor: "maroon",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
@@ -140,6 +140,16 @@ class App extends Component {
       color: "white",
       display:"block",
       margin: "10px auto"
+    };
+    const styleWithoutMargin = {
+      backgroundColor: "LightCoral",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+      color: "white",
+      display:"block",
+      margin: "10px"
     };
     let users = null;
     if (this.state.showUsers) {
@@ -196,15 +206,17 @@ class App extends Component {
       title={this.props.appTitle}
       showPersons={this.state.showPersons}
       persons={this.state.persons}
-      clicked={this.togglePersonsHandler}
-      click={this.toggleUsersHandler}
-      toggle={this.toggleInputHandler}
     /> 
       : null 
       let withClass = this.state.showWithClass ? 
       <div >
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
+        <div style={{display:"flex", justifyContent:"center"}}>
+        <button onClick={this.togglePersonsHandler} style={styleWithoutMargin}>Toggle Persons</button>
+        <button onClick={this.toggleUsersHandler} style={styleWithoutMargin}>Toggle Users</button>
+        <button onClick={this.toggleInputHandler} style={styleWithoutMargin}>Toggle Input</button>
+        </div>
         {persons}
         {users}
         {input}
