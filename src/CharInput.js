@@ -1,10 +1,13 @@
 import React from 'react';
 import Validation from"./Validation"
 const input = (props) => {
+    if(props.par.length >= 1){
+document.getElementById("paragraph").className="Person"   
+ }
     return (
-        <div className="Input, Person">
+        <div className="Person">
              <input type="text" onChange={props.change} value={props.val}/>
-        <p className="Person">{props.par}</p>
+        <p id="paragraph">{props.par}</p>
         <Validation inputLength={props.len}/>
         <div className="Letters">{props.char}</div>
 

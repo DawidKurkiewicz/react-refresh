@@ -5,7 +5,7 @@ class Person extends Component {
     render() {
         return (
             <WithClass classes="Person">              
-                <h3 onClick={this.props.click}>i'm a {this.props.name} and i am {this.props.age} years old</h3>
+                <h3 style={{cursor:"pointer"}} onClick={this.props.click}>i'm a {this.props.name} and i am {this.props.age} years old</h3>
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
                 <div>
                 <button onClick={this.props.delete}>delete</button>

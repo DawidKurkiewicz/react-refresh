@@ -10,7 +10,7 @@ const validation = (props) => {
             style={background:"green"}
     }
     return (
-        <div style={style} className="Message, Person">
+        <div style={style} className="Person">
             <p>{validationMessage}</p>
         </div>
     )

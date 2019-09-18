@@ -45,19 +45,11 @@ class App extends Component {
     this.setState({ userInput: updatedText })
   }
   switchNameHandler = (newName) => {
-    this.setState({
-      persons: [
-        {
-          name: newName, age: 24, id: "0"
-        },
-        {
-          name: "Manuel", age: 25, id: "1"
-        },
-        {
-          name: "Marc", age: 27, id: "2"
-        }
-      ]
-    })
+    const persons = [...this.state.persons]
+    persons[0].name = newName
+    persons[0].age = 24
+    persons[0].id = "0"
+    this.setState({ persons: persons })
   }
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -79,28 +71,17 @@ class App extends Component {
     this.setState({ persons: persons })
   }
   userNameChangeHandler = () => {
-    this.setState({
-      users: [
-        {
-          userName: "Max", id: "3"
-        },
-        {
-          userName: "Luisa", id: "4"
-        }
-      ]
-    })
+    const users = [...this.state.users]
+    users[1].userName = "Luisa"
+    users[1].id = "4"
+    this.setState({ users: users })
+
   }
   inputUserNameChangeHandler = (event) => {
-    this.setState({
-      users: [
-        {
-          userName: event.target.value, id: "3"
-        },
-        {
-          userName: "Linda", id: "4"
-        }
-      ]
-    })
+    const users = [...this.state.users]
+    users[0].userName = event.target.value
+    users[0].id = "3"
+    this.setState({ users: users })
   }
   togglePersonsHandler = () => {
     const doesShowPersons = this.state.showPersons;
@@ -138,7 +119,7 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer",
       color: "white",
-      display:"block",
+      display: "block",
       margin: "10px auto"
     };
     const styleWithoutMargin = {
@@ -148,7 +129,7 @@ class App extends Component {
       padding: "8px",
       cursor: "pointer",
       color: "white",
-      display:"block",
+      display: "block",
       margin: "10px"
     };
     let users = null;
@@ -202,30 +183,30 @@ class App extends Component {
         char={charList}
       /> : null
     let cockpit = this.state.showCockpit ?
-    <Cockpit
-      title={this.props.appTitle}
-      showPersons={this.state.showPersons}
-      persons={this.state.persons}
-    /> 
-      : null 
-      let withClass = this.state.showWithClass ? 
+      <Cockpit
+        title={this.props.appTitle}
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+      />
+      : null
+    let withClass = this.state.showWithClass ?
       <div >
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
-        <div style={{display:"flex", justifyContent:"center"}}>
-        <button onClick={this.togglePersonsHandler} style={styleWithoutMargin}>Toggle Persons</button>
-        <button onClick={this.toggleUsersHandler} style={styleWithoutMargin}>Toggle Users</button>
-        <button onClick={this.toggleInputHandler} style={styleWithoutMargin}>Toggle Input</button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={this.togglePersonsHandler} style={styleWithoutMargin}>Toggle Persons</button>
+          <button onClick={this.toggleUsersHandler} style={styleWithoutMargin}>Toggle Users</button>
+          <button onClick={this.toggleInputHandler} style={styleWithoutMargin}>Toggle Input</button>
         </div>
         {persons}
         {users}
         {input}
       </div> : null
     return (
- <div>
-      <button onClick={this.toggleWithClassHandler} style={style}>Toggle App</button>
-      {withClass}
-</div>
+      <div>
+        <button onClick={this.toggleWithClassHandler} style={style}>Toggle App</button>
+        {withClass}
+      </div>
     );
   }
 }
