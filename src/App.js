@@ -103,6 +103,30 @@ class App extends Component {
     const doesShowWithClass = this.state.showWithClass
     this.setState({ showWithClass: !doesShowWithClass })
   }
+  personInitialState=()=>{
+    this.setState({persons: [
+      {
+        name: "Max", age: 24, id: "0"
+      },
+      {
+        name: "Manuel", age: 25, id: "1"
+      },
+      {
+        name: "Marc", age: 27, id: "2"
+      }
+    ],})
+  }
+  userInitialState=()=>{
+    this.setState({ users: [
+      {
+        userName: "Mike", id: "3"
+      },
+      {
+        userName: "Linda", id: "4"
+      }
+    ]
+  })
+  }
   render() {
     const charList = this.state.userInput.split('').map((char, index) => {
       return (
@@ -135,11 +159,17 @@ class App extends Component {
     let users = null;
     if (this.state.showUsers) {
       users = (
-        <div className="Users">
-          <button style={style}
+        <div className="Wrapper">
+          <div style={{display:"flex",justifyContent:"center"}}>
+          <button style={styleWithoutMargin}
             onClick={this.userNameChangeHandler}>
-            change
+            Switch User Name 
           </button>
+          <button style={styleWithoutMargin}
+            onClick={()=>this.userInitialState()}>
+            Reset
+       </button>
+       </div>
           <UserInput change={this.inputUserNameChangeHandler}
             currentName={this.state.users[0].userName} />
           {this.state.users.map((user, index) => {
@@ -156,11 +186,17 @@ class App extends Component {
     let persons = null;
     if (this.state.showPersons) {
       persons = (
-        <div className="Persons">
-          <button style={style}
+        <div className="Wrapper">
+          <div style={{display:"flex",justifyContent:"center"}}>
+          <button style={styleWithoutMargin}
             onClick={() => this.switchNameHandler("Jerry")}>
-            Switch Name
+            Switch Person Name
        </button>
+       <button style={styleWithoutMargin}
+            onClick={()=>this.personInitialState()}>
+            Reset
+       </button>
+       </div>
           {this.state.persons.map((person, index) => {
             return <Person
               key={person.id}
@@ -193,14 +229,15 @@ class App extends Component {
       <div >
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <button onClick={this.togglePersonsHandler} style={styleWithoutMargin}>Toggle Persons</button>
-          <button onClick={this.toggleUsersHandler} style={styleWithoutMargin}>Toggle Users</button>
-          <button onClick={this.toggleInputHandler} style={styleWithoutMargin}>Toggle Input</button>
+        <div>
+          <button onClick={this.togglePersonsHandler} style={style}>Toggle Persons</button>
+          {persons}
+          <button onClick={this.toggleUsersHandler} style={style}>Toggle Users</button>
+          {users}
+          <button onClick={this.toggleInputHandler} style={style}>Toggle Input</button>
+          {input}
         </div>
-        {persons}
-        {users}
-        {input}
+       
       </div> : null
     return (
       <div>
