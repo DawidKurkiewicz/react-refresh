@@ -54,7 +54,9 @@ class App extends Component {
       persons[0].age = 24
       persons[0].id = "0"
       this.setState({ persons: persons })
-    } else { return}
+    } else { 
+      alert("There no Person to change")
+    }
 
   }
   nameChangeHandler = (event, id) => {
