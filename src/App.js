@@ -33,10 +33,11 @@ class App extends Component {
     showPersons: false,
     showUsers: false,
     showInput: false,
-    showCockpit: false,
+    showCockpit: true,
     isBlockPersons:false,
     isBlockUsers:false,
     isBlockInput:false,
+    showWithClass: true
   }
   inputChangedHanlder = (event) => {
     this.setState({ userInput: event.target.value })
@@ -269,7 +270,6 @@ class App extends Component {
           <button onClick={this.toggleInputHandler} style={(this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput) ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Input</button>
           {input}
         </div>
-
       </div> : null
     return (
       <div>
