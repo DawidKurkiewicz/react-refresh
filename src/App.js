@@ -163,6 +163,16 @@ class App extends Component {
       display: "block",
       margin: "10px"
     };
+    const styleWithoutMarginForButtons = {
+      backgroundColor: "CadetBlue  ",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer",
+      color: "white",
+      display: "block",
+      margin: "10px"
+    };
     const styleWithColorAndMargin = {
       backgroundColor: "LightCoral",
       font: "inherit",
@@ -178,11 +188,11 @@ class App extends Component {
       users = (
         <div className="Wrapper">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <button style={styleWithoutMargin}
+            <button style={styleWithoutMarginForButtons}
               onClick={this.userNameChangeHandler}>
               Switch User Name
           </button>
-            <button style={styleWithoutMargin}
+            <button style={styleWithoutMarginForButtons}
               onClick={() => this.userInitialState()}>
               Reset
        </button>
@@ -205,11 +215,11 @@ class App extends Component {
       persons = (
         <div className="Wrapper">
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <button style={styleWithoutMargin}
+            <button style={styleWithoutMarginForButtons}
               onClick={() => this.switchNameHandler("Jerry")}>
               Switch Person Name
        </button>
-            <button style={styleWithoutMargin}
+            <button style={styleWithoutMarginForButtons}
               onClick={() => this.personInitialState()}>
               Reset
        </button>
