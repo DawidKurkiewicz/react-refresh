@@ -9,8 +9,15 @@
 .Wrapper {
     width:95%;
     margin: 10px auto;
-    border: 5px solid black;
+    border: 3px solid black;
     box-shadow: 0 2px 3px grey;
     padding: 16px;
     text-align:center;
+}
+.Center{
+    display:flex;
+    justify-content:center
+}
+.Block{
+    display:block
 }
