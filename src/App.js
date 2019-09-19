@@ -34,9 +34,9 @@ class App extends Component {
     showUsers: false,
     showInput: false,
     showCockpit: true,
-    isBlockPersons:false,
-    isBlockUsers:false,
-    isBlockInput:false,
+    isBlockPersons: false,
+    isBlockUsers: false,
+    isBlockInput: false,
     showWithClass: true
   }
   inputChangedHanlder = (event) => {
@@ -49,13 +49,13 @@ class App extends Component {
     this.setState({ userInput: updatedText })
   }
   switchNameHandler = (newName) => {
-    if(this.state.persons[0]){
+    if (this.state.persons[0]) {
       const persons = [...this.state.persons]
       persons[0].name = newName
       persons[0].age = 24
       persons[0].id = "0"
       this.setState({ persons: persons })
-    } else { 
+    } else {
       alert("There no Person to change")
     }
 
@@ -258,16 +258,17 @@ class App extends Component {
         persons={this.state.persons}
       />
       : null
+    let operator = (this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput)
     let withClass = this.state.showWithClass ?
       <div>
         <button onClick={this.toggleCockpitHandler} style={style}>Toggle Cockpit</button>
         {cockpit}
-        <div className={(this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput) ? "Block" : "Center"}>
-          <button onClick={this.togglePersonsHandler} style={(this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput) ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Persons</button>
+        <div className={operator ? "Block" : "Center"}>
+          <button onClick={this.togglePersonsHandler} style={operator ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Persons</button>
           {persons}
-          <button onClick={this.toggleUsersHandler} style={(this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput) ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Users</button>
+          <button onClick={this.toggleUsersHandler} style={operator ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Users</button>
           {users}
-          <button onClick={this.toggleInputHandler} style={(this.state.isBlockPersons || this.state.isBlockUsers || this.state.isBlockInput) ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Input</button>
+          <button onClick={this.toggleInputHandler} style={operator ? styleWithColorAndMargin : styleWithoutMargin}>Toggle Input</button>
           {input}
         </div>
       </div> : null
