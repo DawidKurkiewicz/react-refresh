@@ -48,11 +48,14 @@ class App extends Component {
     this.setState({ userInput: updatedText })
   }
   switchNameHandler = (newName) => {
-    const persons = [...this.state.persons]
-    persons[0].name = newName
-    persons[0].age = 24
-    persons[0].id = "0"
-    this.setState({ persons: persons })
+    if(this.state.persons[0]){
+      const persons = [...this.state.persons]
+      persons[0].name = newName
+      persons[0].age = 24
+      persons[0].id = "0"
+      this.setState({ persons: persons })
+    } else { return}
+
   }
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
