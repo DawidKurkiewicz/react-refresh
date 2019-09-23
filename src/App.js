@@ -55,7 +55,7 @@ class App extends Component {
       persons[0].id = "0"
       this.setState({ persons: persons })
     } else {
-      alert("There no Person to change")
+      alert("There is no Person to change")
     }
 
   }
